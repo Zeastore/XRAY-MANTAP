@@ -23,6 +23,13 @@ MYIP=$(wget -qO- ipinfo.io/ip);
 echo "Checking VPS"
 IZIN=$(wget -qO- ipinfo.io/ip);
 clear
+
+cat >/root/domain <<EOF
+https://raw.githubusercontent.com/Zeastore/gaspoll/cf.sh && chmod +x cf.sh && ./etc/xray/domain
+EOF
+mkdir -p /etc/xray
+cat >/etc/xray/domain
+
 mkdir /var/lib/crot;
 echo "IP=" >> /var/lib/crot/ipvps.conf
 cd
