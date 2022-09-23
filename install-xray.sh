@@ -476,6 +476,10 @@ sed -i '$ i}' /etc/nginx/conf.d/xray.conf
 
 
 sleep 1
+
+wget -q -O /usr/bin/crtv2ray "https://raw.githubusercontent.com/Zeastore/XRAY-MANTAP/main/cert.sh" && chmod +x /usr/bin/crtv2ray
+chmod +- certv2ray
+
 echo -e "[ ${green}INFO$NC ] Installing bbr.."
 #wget -q -O /usr/bin/bbr "https://raw.githubusercontent.com/apih46/mini/main/dll/bbr.sh"
 #chmod +x /usr/bin/bbr
