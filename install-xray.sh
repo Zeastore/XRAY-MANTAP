@@ -67,7 +67,13 @@ bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release
 
 ## crt xray
 systemctl stop nginx
-rm -rf /etc/nginx/conf.d/alone.conf
+mkdir /root/.acme.sh
+curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
+chmod +x /root/.acme.sh/acme.sh
+/root/.acme.sh/acme.sh --upgrade --auto-upgrade
+/root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
+/root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
+~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
 
 # nginx 
 /etc/init.d/nginx stop
@@ -476,10 +482,6 @@ sed -i '$ i}' /etc/nginx/conf.d/xray.conf
 
 
 sleep 1
-
-wget -q -O /usr/bin/crtv2ray "https://raw.githubusercontent.com/Zeastore/XRAY-MANTAP/main/cert.sh" && chmod +x /usr/bin/crtv2ray
-chmod +- certv2ray
-
 echo -e "[ ${green}INFO$NC ] Installing bbr.."
 #wget -q -O /usr/bin/bbr "https://raw.githubusercontent.com/apih46/mini/main/dll/bbr.sh"
 #chmod +x /usr/bin/bbr
